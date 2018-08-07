@@ -1,0 +1,49 @@
+﻿PS C:\src\vie\trunk\RelayHealth> Login-AzureRmAccount -Subscription a646d321-18de-4209-a895-5c7dec3a9ca0
+
+
+Account          : rodney.kam@live.com
+SubscriptionName : Visual Studio Enterprise with MSDN
+SubscriptionId   : a646d321-18de-4209-a895-5c7dec3a9ca0
+TenantId         : b37600f0-1e5e-48fb-b34d-d9bdb51cdbc5
+Environment      : AzureCloud
+
+
+
+PS C:\src\vie\trunk\RelayHealth> $passwd = ConvertTo-SecureString "R3l@yH3@lth" -AsPlainText -Force
+PS C:\src\vie\trunk\RelayHealth> $sp = New-AzureRmADServicePrincipal -DisplayName "AzureTeamCityDeploy" -Password $passw
+d
+PS C:\src\vie\trunk\RelayHealth> $sp
+
+
+ServicePrincipalNames : {b953e870-be7d-44b5-a4ed-17a3ba091aa3, http://AzureTeamCityDeploy}
+ApplicationId         : b953e870-be7d-44b5-a4ed-17a3ba091aa3
+DisplayName           : AzureTeamCityDeploy
+Id                    : 9e6e6d6a-063c-435b-af93-3335cc941bd8
+Type                  : ServicePrincipal
+
+
+
+PS C:\src\vie\trunk\RelayHealth> New-AzureRmRoleAssignment -ServicePrincipalName $sp.ApplicationId -RoleDefinitionName C
+ontributor
+
+
+RoleAssignmentId   : /subscriptions/a646d321-18de-4209-a895-5c7dec3a9ca0/providers/Microsoft.Authorization/roleAssignme
+                     nts/591b2c0e-05d5-476b-ae9f-7a7530d8b736
+Scope              : /subscriptions/a646d321-18de-4209-a895-5c7dec3a9ca0
+DisplayName        : AzureTeamCityDeploy
+SignInName         :
+RoleDefinitionName : Contributor
+RoleDefinitionId   : b24988ac-6180-42a0-ab88-20f7382dd24c
+ObjectId           : 9e6e6d6a-063c-435b-af93-3335cc941bd8
+ObjectType         : ServicePrincipal
+
+
+
+PS C:\src\vie\trunk\RelayHealth> $sp | Select DisplayName, ApplicationId
+
+DisplayName         ApplicationId
+-----------         -------------
+AzureTeamCityDeploy b953e870-be7d-44b5-a4ed-17a3ba091aa3
+
+
+PS C:\src\vie\trunk\RelayHealth>
